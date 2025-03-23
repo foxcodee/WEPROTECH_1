@@ -9,7 +9,9 @@
     --header-border: #ddd;
     --link-color: #cc0000;
     --link-bg-active: rgba(204, 0, 0, 0.1);
+    --logo-color: #000;
     --svg-fill: black;
+    --svg-fill-filter: invert(0%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,7 +25,9 @@
         --header-border: #444;
         --link-color: #ff6666;
         --link-bg-active: rgba(255, 102, 102, 0.2);
+        --logo-color: #fff;
         --svg-fill: white;
+        --svg-fill-filter: invert(100%);
     }
 }
 
@@ -76,10 +80,19 @@ header {
 .logo {
     max-width: 450px;
     transition: transform 0.2s ease;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .logo:hover {
     transform: translateY(-2px);
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: var(--svg-fill-filter);
 }
 
 .logo svg {
@@ -101,8 +114,7 @@ header {
 }
 
 .language-selector:hover {
-    border: 1px dashed var(--link-color);
-    border-radius: 4px;
+    border: 1px solid transparent;
 }
 
 .language-selector a {
@@ -112,10 +124,21 @@ header {
     font-weight: normal;
     transition: all 0.2s ease;
     padding: 2px 4px;
+    position: relative;
 }
 
 .language-selector a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+}
+
+.language-selector a:hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--link-color);
 }
 
 .language-selector a.active {
@@ -625,6 +648,8 @@ h2::after {
     
     .logo {
         max-width: 350px;
+        margin: 0 auto;
+        justify-content: center;
     }
     
     .language-selector {
@@ -656,6 +681,8 @@ h2::after {
 @media (max-width: 600px) {
     .logo {
         max-width: 300px;
+        margin: 0 auto;
+        justify-content: center;
     }
     
     h2 {
@@ -694,6 +721,7 @@ h2::after {
     .logo {
         max-width: 280px;
         margin: 0 auto;
+        justify-content: center;
     }
     
     .language-selector {
@@ -727,6 +755,8 @@ h2::after {
 @media (max-width: 375px) {
     .logo {
         max-width: 220px;
+        margin: 0 auto;
+        justify-content: center;
     }
     
     .language-selector {
